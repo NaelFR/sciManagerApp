@@ -9,14 +9,14 @@ const instance = axios.create({ baseURL: process.env.VUE_APP_API_URL, headers })
 
 
 export default async function apiCall({url, method, body, ...args}) {
-    let data;
+    let res = {};
     try {
-        data = instance.request({url, method, data: body, ...args})
+        res = await instance.request({url, method, data: body, ...args})
     } catch(error) {
         if(error.response && error.response.status === 401) {
             console.log("Tu n'es pas connecté !!!!!!!!!!!")
         }
         throw error;
     }
-    return data;
+    return {...res.data, axios: res};
 }
