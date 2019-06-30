@@ -1,5 +1,6 @@
 import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from '../actions/user'
 import apiCall from '../../utils/apiCall';
+import { user } from '../../api/index';
 import Vue from 'vue'
 import { AUTH_LOGOUT } from '../actions/auth'
 
@@ -13,8 +14,9 @@ const getters = {
 const actions = {
     [USER_REQUEST]: ({commit, dispatch}) => {
         commit(USER_REQUEST)
-        apiCall({url: 'user/me'})
+        user()
             .then(resp => {
+                console.log('USER_SUCCESS', resp);
                 commit(USER_SUCCESS, resp)
             })
             .catch(resp => {
@@ -31,7 +33,7 @@ const mutations = {
     },
     [USER_SUCCESS]: (state, resp) => {
         state.status = 'success'
-        Vue.set(state, 'profile', resp)
+        // Vue.set(state, 'profile', resp)
     },
     [USER_ERROR]: (state) => {
         state.status = 'error'
