@@ -8,6 +8,8 @@ import store from "./store/store";
 import "./registerServiceWorker";
 import axios from "axios";
 import colors from 'vuetify/es5/util/colors'
+import '@fortawesome/fontawesome-free/js/all'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 
 Vue.config.productionTip = false;
