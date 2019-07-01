@@ -19,8 +19,6 @@ const actions = {
             commit(FETCH_ALL_BUILDINGS_REQUEST);
             fetchBuildings()
                 .then(({ data }) => {
-                    console.log(data);
-
                     commit(FETCH_ALL_BUILDINGS_SUCCESS, data);
                     resolve(data)
                 })
@@ -38,6 +36,7 @@ const mutations = {
         state.isFetching = true;
     },
     [FETCH_ALL_BUILDINGS_SUCCESS]: (state, resp) => {
+        state.buildings = resp;
         state.isFetching = false;
     },
     [FETCH_ALL_BUILDINGS_ERROR]: (state, err) => {
